@@ -10,7 +10,7 @@ RUN apt update && \
     git clone https://github.com/google/ngx_brotli.git && \
     cd ngx_brotli && \
     git submodule update --init --recursive && \
-    sed -i 's/--add-dynamic-module=\$(MODULESDIR)\/http-echo/--add-dynamic-module=\$(MODULESDIR)\/http-echo --add-dynamic-module=\/usr\/src\/nginx\/ngx_brotli/' /usr/src/nginx/nginx-*/debian/rules && \
+    sed -i 's/--without-http_userid_module/--without-http_userid_module --add-dynamic-module=\/usr\/src\/nginx\/ngx_brotli/' /usr/src/nginx/nginx-*/debian/rules && \
     cd ../
 RUN apt-src build nginx && \
     cp /usr/src/nginx/nginx-*/debian/build-light/objs/ngx_http_brotli_*_module.so /usr/lib/nginx/modules
