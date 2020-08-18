@@ -11,8 +11,8 @@ RUN apt update && \
     cd ngx_brotli && \
     git submodule update --init --recursive && \
     sed -i 's/--add-dynamic-module=\$(MODULESDIR)\/http-echo/--add-dynamic-module=\$(MODULESDIR)\/http-echo --add-dynamic-module=\/usr\/src\/nginx\/ngx_brotli/' /usr/src/nginx/nginx-*/debian/rules && \
-    cd ../ && \
-    apt-src build nginx && \
+    cd ../
+RUN apt-src build nginx && \
     cp /usr/src/nginx/nginx-*/debian/build-light/objs/ngx_http_brotli_*_module.so /usr/lib/nginx/modules
     
     
