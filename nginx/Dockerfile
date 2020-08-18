@@ -6,13 +6,13 @@ RUN apt update && \
     echo 'deb-src http://deb.debian.org/debian bullseye main non-free contrib' >> /etc/apt/sources.list && \
     apt-src update && \
     apt update && \
-    apt-src install nginx-light && \
+    apt-src install nginx && \
     git clone https://github.com/google/ngx_brotli.git && \
     cd ngx_brotli && \
     git submodule update --init --recursive && \
     sed -i 's/--add-dynamic-module=\$(MODULESDIR)\/http-echo/--add-dynamic-module=\$(MODULESDIR)\/http-echo --add-dynamic-module=\/usr\/src\/nginx\/ngx_brotli/' /usr/src/nginx/nginx-*/debian/rules && \
     cd ../ && \
-    apt-src build nginx-light && \
+    apt-src build nginx && \
     cp /usr/src/nginx/nginx-*/debian/build-light/objs/ngx_http_brotli_*_module.so /usr/lib/nginx/modules
     
     
