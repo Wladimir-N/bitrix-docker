@@ -1,6 +1,6 @@
 FROM debian:bullseye
 RUN apt update && \
-    apt install --no-install-recommends --no-install-suggests -y nginx-light libnginx-mod-http-image-filter libnginx-mod-http-geoip2 apt-src libbrotli-dev git ca-certificates && \
+    apt install --no-install-recommends --no-install-suggests -y nginx-light libnginx-mod-http-image-filter libnginx-mod-http-geoip2 apt-src libbrotli-dev git ca-certificates apt install --no-install-recommends libgl-dev && \
     mkdir -p /usr/src/nginx && \
     cd /usr/src/nginx && \
     echo 'deb-src http://deb.debian.org/debian bullseye main non-free contrib' >> /etc/apt/sources.list && \
