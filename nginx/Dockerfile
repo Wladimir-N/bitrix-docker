@@ -1,6 +1,6 @@
 FROM debian:bullseye
 RUN apt update && \
-    apt install --no-install-recommends --no-install-suggests -y nginx-light libnginx-mod-http-image-filter libnginx-mod-http-geoip2 apt-src libbrotli-dev git ca-certificates apt install --no-install-recommends libgl-dev && \
+    apt install --no-install-recommends --no-install-suggests -y nginx-light libnginx-mod-http-image-filter libnginx-mod-http-geoip2 apt-src libbrotli-dev git ca-certificates libgl-dev && \
     mkdir -p /usr/src/nginx && \
     cd /usr/src/nginx && \
     echo 'deb-src http://deb.debian.org/debian bullseye main non-free contrib' >> /etc/apt/sources.list && \
@@ -10,9 +10,9 @@ RUN apt update && \
     git clone https://github.com/google/ngx_brotli.git && \
     cd ngx_brotli && \
     git submodule update --init --recursive && \
-    sed -i 's/--without-http_userid_module/--without-http_userid_module --add-dynamic-module=\/usr\/src\/nginx\/ngx_brotli/' /usr/src/nginx/nginx-*/debian/rules && \
-    cd ../
-RUN apt-src build nginx && \
+    sed -i 's/--without-http_userid_module/--without-http_userid_module --add-dynamic-module=\/usr\/src\/nginx\/ngx_brotli/' /usr/src/nginx/nginx-*/debian/rules
+RUN cd /usr/src/nginx && \
+    apt-src build nginx && \
     cp /usr/src/nginx/nginx-*/debian/build-light/objs/ngx_http_brotli_*_module.so /usr/lib/nginx/modules
     
     
