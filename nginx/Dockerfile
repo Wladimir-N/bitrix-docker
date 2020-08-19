@@ -14,11 +14,13 @@ RUN apt update && \
     sed -i 's/--without-http_userid_module/--without-http_userid_module --add-dynamic-module=\/usr\/src\/nginx\/ngx_brotli/' /usr/src/nginx/nginx-*/debian/rules && \
     cd /usr/src/nginx && \
     apt-src build nginx
+ADD conf/GeoIP.conf /etc/GeoIP.conf
 RUN rm -rf /usr/src/nginx && \
     cp /usr/src/nginx/nginx-*/debian/build-light/objs/ngx_http_brotli_*_module.so /usr/lib/nginx/modules && \
     echo 'load_module modules/ngx_http_brotli_filter_module.so;' > /usr/share/nginx/modules-available/mod-http-brotli.conf && \
     echo 'load_module modules/ngx_http_brotli_static_module.so;' >> /usr/share/nginx/modules-available/mod-http-brotli.conf && \
-    ln -s /usr/share/nginx/modules-available/mod-http-brotli.conf /etc/nginx/modules-enabled
+    ln -s /usr/share/nginx/modules-available/mod-http-brotli.conf /etc/nginx/modules-enabled && \
+    /usr/bin/geoipupdate    
 ADD conf/nginx.conf /etc/nginx/
 ADD conf/default.conf /etc/nginx/conf.d/
 ADD conf/upstream.conf /etc/nginx/conf.d/
