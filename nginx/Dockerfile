@@ -20,7 +20,8 @@ RUN rm -rf /usr/src/nginx && \
     echo 'load_module modules/ngx_http_brotli_filter_module.so;' > /usr/share/nginx/modules-available/mod-http-brotli.conf && \
     echo 'load_module modules/ngx_http_brotli_static_module.so;' >> /usr/share/nginx/modules-available/mod-http-brotli.conf && \
     ln -s /usr/share/nginx/modules-available/mod-http-brotli.conf /etc/nginx/modules-enabled && \
-    /usr/bin/geoipupdate    
+    /usr/bin/geoipupdate && \
+    echo -e 'fastcgi_param  GEOIP_COUNTRY      $geoip2_data_country_name;\nfastcgi_param  GEOIP_COUNTRY_CODE $geoip2_data_country_code;\nfastcgi_param  GEOIP_CITYNAME     $geoip2_data_city_name;\nfastcgi_param  GEOIP_REGION_GEONAMEID $geoip2_data_region_geonameid;\nfastcgi_param  GEOIP_REGION_ISO   $geoip2_data_region_iso;\nfastcgi_param  GEOIP_REGION       $geoip2_data_region_name;' >> /etc/nginx/fastcgi_params
 ADD conf/nginx.conf /etc/nginx/
 ADD conf/default.conf /etc/nginx/conf.d/
 ADD conf/upstream.conf /etc/nginx/conf.d/
