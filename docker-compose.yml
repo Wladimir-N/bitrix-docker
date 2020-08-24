@@ -16,7 +16,6 @@ services:
             - '${INTERFACE}:9000:9000'
         links:
             - db
-            - memcached
         networks:
             - bitrix
         restart: always
@@ -51,25 +50,6 @@ services:
         networks:
             - bitrix
         restart: always
-    memcached:
-        image: memcached:1.5-alpine
-        container_name: memcached
-        volumes_from:
-            - source
-        ports:
-            - '${INTERFACE}:11211:11211'
-        networks:
-            - bitrix
-        restart: always
-    adminer:
-        image: adminer
-        container_name: adminer
-        links:
-            - db:db
-        ports:
-            - '${INTERFACE}:8080:8080'
-        networks:
-            - bitrix
     source:
         image: alpine:latest
         container_name: source
@@ -77,9 +57,7 @@ services:
             - ./logs/${WEB_SERVER_TYPE}:/var/log/${WEB_SERVER_TYPE}
             - ./logs/php:/var/log/php
             - ./logs/db:/var/log/mysql
-            - ./logs/memcached:/var/log/memcached
             - db:/var/lib/mysql
-            - ./data/memcached:/var/lib/memcached
             - ./www/html:/var/www/html
             - ${SITE_PATH}:/var/www/bitrix
             - /etc/localtime:/etc/localtime/:ro
