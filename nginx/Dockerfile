@@ -25,7 +25,8 @@ RUN cp /usr/src/nginx/nginx-*/debian/build-light/objs/ngx_http_brotli_*_module.s
     echo 'fastcgi_param  GEOIP_CITYNAME     $geoip2_data_city_name;' >> /etc/nginx/fastcgi_params && \
     echo 'fastcgi_param  GEOIP_REGION_GEONAMEID $geoip2_data_region_geonameid;' >> /etc/nginx/fastcgi_params && \
     echo 'fastcgi_param  GEOIP_REGION_ISO   $geoip2_data_region_iso;' >> /etc/nginx/fastcgi_params && \
-    echo 'fastcgi_param  GEOIP_REGION       $geoip2_data_region_name;' >> /etc/nginx/fastcgi_params
+    echo 'fastcgi_param  GEOIP_REGION       $geoip2_data_region_name;' >> /etc/nginx/fastcgi_params && \
+    rm /etc/nginx/sites-enabled/default
 ADD conf/nginx.conf /etc/nginx/
 ADD conf/default.conf /etc/nginx/conf.d/
 ADD conf/upstream.conf /etc/nginx/conf.d/
