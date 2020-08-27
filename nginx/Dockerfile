@@ -1,12 +1,11 @@
 FROM debian:bullseye
-RUN apt update && \
+RUN echo 'deb http://deb.debian.org/debian bullseye main non-free contrib' > /etc/apt/sources.list && \
+    echo 'deb-src http://deb.debian.org/debian bullseye main non-free contrib' >> /etc/apt/sources.list && \
+    apt update && \
     apt install --no-install-recommends --no-install-suggests -y nginx-light libnginx-mod-http-image-filter libnginx-mod-http-geoip2 apt-src libbrotli-dev git ca-certificates libgl-dev geoipupdate && \
     mkdir -p /usr/src/nginx && \
     cd /usr/src/nginx && \
-    echo 'deb http://deb.debian.org/debian bullseye main non-free contrib' > /etc/apt/sources.list && \
-    echo 'deb-src http://deb.debian.org/debian bullseye main non-free contrib' >> /etc/apt/sources.list && \
     apt-src update && \
-    apt update && \
     apt-src install nginx && \
     git clone https://github.com/google/ngx_brotli.git && \
     cd ngx_brotli && \
