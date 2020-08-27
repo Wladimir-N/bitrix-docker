@@ -2,7 +2,7 @@ FROM debian:bullseye
 RUN echo 'deb http://deb.debian.org/debian bullseye main non-free contrib' > /etc/apt/sources.list && \
     echo 'deb-src http://deb.debian.org/debian bullseye main non-free contrib' >> /etc/apt/sources.list && \
     apt update && \
-    apt install --no-install-recommends --no-install-suggests -y nginx-light libnginx-mod-http-image-filter libnginx-mod-http-geoip2 apt-src libbrotli-dev git ca-certificates libgl-dev geoipupdate && \
+    apt install --no-install-recommends --no-install-suggests -y nginx-core libnginx-mod-http-image-filter libnginx-mod-http-geoip2 apt-src libbrotli-dev git ca-certificates libgl-dev geoipupdate && \
     mkdir -p /usr/src/nginx && \
     cd /usr/src/nginx && \
     apt-src update && \
