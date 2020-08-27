@@ -1,6 +1,6 @@
 FROM php:7.4-fpm
 RUN apt update && \
-    apt install --no-install-recommends -y zlib1g-dev && \
+    apt install --no-install-recommends -y zlib1g-dev libpng++-dev && \
     docker-php-ext-install mysqli gd
 ADD ./php.ini /usr/local/etc/php/conf.d/90-php.ini
 RUN usermod -u 1000 www-data
