@@ -14,8 +14,8 @@ RUN echo 'deb http://deb.debian.org/debian bullseye main non-free contrib' > /et
     cd /usr/src/nginx && \
     apt-src build nginx
 ADD conf/GeoIP.conf /etc/GeoIP.conf
-RUN rm -rf /usr/src/nginx && \
-    cp /usr/src/nginx/nginx-*/debian/build-light/objs/ngx_http_brotli_*_module.so /usr/lib/nginx/modules && \
+RUN cp /usr/src/nginx/nginx-*/debian/build-light/objs/ngx_http_brotli_*_module.so /usr/lib/nginx/modules && \
+    rm -rf /usr/src/nginx && \
     echo 'load_module modules/ngx_http_brotli_filter_module.so;' > /usr/share/nginx/modules-available/mod-http-brotli.conf && \
     echo 'load_module modules/ngx_http_brotli_static_module.so;' >> /usr/share/nginx/modules-available/mod-http-brotli.conf && \
     ln -s /usr/share/nginx/modules-available/mod-http-brotli.conf /etc/nginx/modules-enabled && \
