@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:7.3-fpm
 RUN apt update && \
     apt install --no-install-recommends -y zlib1g-dev libpng++-dev libfreetype6-dev libjpeg62-turbo-dev && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
