@@ -30,7 +30,6 @@ RUN cp /usr/src/nginx/nginx-*/debian/build-light/objs/ngx_http_brotli_*_module.s
 ADD conf/nginx.conf /etc/nginx/
 ADD conf/default.conf /etc/nginx/conf.d/
 ADD conf/upstream.conf /etc/nginx/conf.d/
-ADD conf/return.conf /etc/nginx/
 RUN usermod -u 1000 www-data
 CMD ["nginx"]
 EXPOSE 80 443
